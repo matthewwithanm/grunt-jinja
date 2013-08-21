@@ -1,7 +1,7 @@
 {
   "name": "grunt-jinja",
   "description": "A grunt plugin for compiling Jinja2 templates with nunjucks.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/matthewwithanm/grunt-jinja",
   "author": {
     "name": "Matthew Tretter",
