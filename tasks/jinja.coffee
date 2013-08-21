@@ -53,7 +53,16 @@ module.exports = (grunt) ->
         grunt.fail.warn """Can't compile multiple sources into a single destination: #{ ', '.join validFiles }"""
 
       validFiles.forEach (src) ->
-        tmpl = env.getTemplate src
+        # Get the template name from the filepath
+        templateName = do ->
+          for dir in templateDirs
+            fullPath = path.normalize src
+            relPath = path.relative dir, fullPath
+            unless relPath[0] is '.'
+              return relPath
+          throw new Error """Couldn't find "#{ src }" in template dirs: #{ templateDirs.join ', ' }"""
+
+        tmpl = env.getTemplate templateName
         try
           output = tmpl.render {}  # TODO: Load context docs
         catch err
