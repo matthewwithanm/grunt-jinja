@@ -1,6 +1,7 @@
 # grunt-jinja
 
-> A grunt plugin for compiling Jinja2 templates with nunjucks.
+> A grunt plugin for compiling Jinja2 templates with James Long's awesome
+> [nunjucks templating system][nunjucks].
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -37,53 +38,93 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.templateDirs
+Type: `Array`
+Default value: `[path.join(process.cwd(), 'templates']`
 
-A string value that is used to do something with whatever.
+A an array of paths in which your templates can be found. If not provided, this
+will default to the "templates" directory at the same level as your Gruntfile.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+### Other options
 
-A string value that is used to do something else with whatever else.
+Other options are passed directly to the [nunjucks environment object][1].
+Currently, valid options are as follows:
+
+#### options.dev
+Type: `Boolean`
+Default value: `false`
+
+A boolean which, if true, puts nunjucks into development mode which means that
+error stack traces will not be cleaned up.
+
+### options.autoescape
+Type: `Boolean`
+Default value: `true`
+
+A boolean which, if true, will escape all output by default See
+[Autoescaping][2].
+
+### options.tags
+Type: `Object`
+Default value: {}
+
+An object specifying custom block start and end tags. See [Customizing Variable
+and Block Tags][3].
+
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used to compile a templates in the
+"templates/" directory to the "built" directory:
 
 ```js
 grunt.initConfig({
   jinja: {
-    options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'built/index.html': 'templates/index.html'
     },
   },
+})
+```
+
+This example compiles all templates that don't begin with an underscore:
+
+```js
+grunt.initConfig({
+  jinja: {
+    dist: {
+      files: [{
+        expand: true,
+        dest: 'built/',
+        cwd: 'templates/',
+        src: ['**/!(_)*.html']
+      }]
+    }
+  }
 })
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, custom options are used to load the templates from directories
+other than "templates":
 
 ```js
 grunt.initConfig({
   jinja: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    dist: {
+      options: {
+        templateDirs: ['src/templates']
+      },
+      files: {
+        'built/index.html': 'src/templates/index.html'
+      }
+    }
+  }
 })
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
+[nunjucks]: https://github.com/jlongster/nunjucks
+[1]: http://nunjucks.jlongster.com/api#Environment
+[2]: http://nunjucks.jlongster.com/api#Autoescaping
+[3]: http://nunjucks.jlongster.com/api#Customizing-Variable-and-Block-Tags

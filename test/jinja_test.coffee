@@ -1,4 +1,6 @@
 grunt = require 'grunt'
+fs = require 'fs'
+coffee = require '../tasks/jinja'
 
 #  ======== A Handy Little Nodeunit Reference ========
 #  https://github.com/caolan/nodeunit
@@ -18,25 +20,26 @@ grunt = require 'grunt'
 #    test.doesNotThrow(block, [error], [message])
 #    test.ifError(value)
 
+
+# A few helpers borrowed from https://github.com/namuol/grunt-coffeecup/
+readFile = (file) ->
+  contents = grunt.file.read file
+  contents = contents.replace /\r\n/g, '\n'  if process.platform is 'win32'
+  contents
+assertFileEquality = (test, pathToActual, pathToExpected, message) ->
+  actual = readFile pathToActual
+  expected = readFile pathToExpected
+  test.equal expected, actual, message
+
+
 exports.jinja =
-  setUp: (done) ->
-    # setup here if necessary
-    done()
 
-  default_options: (test) ->
+  compileSimple: (test) ->
     test.expect 1
 
-    actual = grunt.file.read 'tmp/default_options'
-    expected = grunt.file.read 'test/expected/default_options'
-    test.equal actual, expected, 'should describe what the default behavior is.'
-
-    test.done()
-
-  custom_options: (test) ->
-    test.expect 1
-
-    actual = grunt.file.read 'tmp/custom_options'
-    expected = grunt.file.read 'test/expected/custom_options'
-    test.equal actual, expected, 'should describe what the custom option(s) behavior is.'
+    assertFileEquality test,
+      'tmp/simple/index.html',
+      'test/expected/simple/index.html',
+      'Should compile Jinja templates'
 
     test.done()

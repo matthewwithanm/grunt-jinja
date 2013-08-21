@@ -18,16 +18,9 @@ module.exports = (grunt) ->
 
     # Configuration to be run (and then tested).
     jinja:
-      default_options:
-        options: {}
+      simple:
         files:
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-      custom_options:
-        options:
-          separator: ': '
-          punctuation: ' !!!'
-        files:
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
+          'tmp/simple/index.html': 'test/fixtures/simple/index.html'
 
     # Unit tests.
     nodeunit:
