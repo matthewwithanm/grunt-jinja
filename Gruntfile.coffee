@@ -25,6 +25,12 @@ module.exports = (grunt) ->
           templateDirs: [path.join __dirname, 'test/fixtures/simple/']
         files:
           'tmp/simple/index.html': 'test/fixtures/simple/index.html'
+      context:
+        options:
+          templateDirs: [path.join __dirname, 'test/fixtures/context/templates/']
+          contextRoot: path.join __dirname, 'test/fixtures/context/template-context/'
+        files:
+          'tmp/context/index.html': 'test/fixtures/context/templates/index.html'
 
     # Unit tests.
     nodeunit:

@@ -28,6 +28,17 @@ module.exports = (grunt) ->
     # Merge task-specific and/or target-specific options with these defaults.
     options = @options
       templateDirs: [path.join process.cwd(), 'templates']
+      contextRoot: path.join process.cwd(), 'template-context'
+
+    loadContext = (templateName, removeExtension = true) ->
+      ext = path.extname(templateName)
+      contextName = if ext then templateName[...-ext.length] else templateName
+      try
+        context = require path.resolve(options.contextRoot, contextName)
+      catch err
+        return {}
+      grunt.log.writeln "Using context #{ contextName }"
+      context
 
     templateDirs = options.templateDirs or []
     loaders = (new nunjucks.FileSystemLoader(dir) for dir in templateDirs)
@@ -39,7 +50,7 @@ module.exports = (grunt) ->
     # environment.
     envOptions = {}
     for own k, v of options
-      unless k is 'templateDirs'
+      unless k in ['templateDirs', 'contextRoot']
         envOptions[k] = v
 
     env = new nunjucks.Environment loaders, envOptions
@@ -62,9 +73,10 @@ module.exports = (grunt) ->
               return relPath
           throw new Error """Couldn't find "#{ src }" in template dirs: #{ templateDirs.join ', ' }"""
 
+        context = _.extend {}, loadContext('_all', false), loadContext(templateName)
         tmpl = env.getTemplate templateName
         try
-          output = tmpl.render {}  # TODO: Load context docs
+          output = tmpl.render context
         catch err
           grunt.log.error err
           grunt.fail.warn "Couldn't render Jinja template."

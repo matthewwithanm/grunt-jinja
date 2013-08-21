@@ -43,3 +43,13 @@ exports.jinja =
       'Should compile Jinja templates'
 
     test.done()
+
+  compileWithContext: (test) ->
+    test.expect 1
+
+    assertFileEquality test,
+      'tmp/context/index.html',
+      'test/expected/context/index.html',
+      'Should compile Jinja templates with context files'
+
+    test.done()

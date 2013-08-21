@@ -45,6 +45,18 @@ Default value: `[path.join(process.cwd(), 'templates')]`
 A an array of paths in which your templates can be found. If not provided, this
 will default to the "templates" directory at the same level as your Gruntfile.
 
+#### options.contextRoot
+Type: `String`
+Default value: `path.join(process.cwd(), 'template-context')`
+
+The directory in which your template context files can be found. grunt-jinja
+will look in this directory to find JSON documents or node modules that
+correspond to your template names and use them for that template. For example,
+if you use a template "products/phones.html", you can create a
+"products/phones.json" or "products/phones.js" file in the context root and it
+will be used as context when rendering the template. To add context to all of
+your templates, create an "_all.json" or "_all.js" file in the context root.
+
 ### Other options
 
 Other options are passed directly to the [nunjucks environment object][1].
