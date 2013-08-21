@@ -6,6 +6,8 @@
 # Licensed under the MIT license.
 #
 
+path = require 'path'
+
 
 module.exports = (grunt) ->
 
@@ -19,6 +21,8 @@ module.exports = (grunt) ->
     # Configuration to be run (and then tested).
     jinja:
       simple:
+        options:
+          templateDirs: [path.join __dirname, 'test/fixtures/simple/']
         files:
           'tmp/simple/index.html': 'test/fixtures/simple/index.html'
 
