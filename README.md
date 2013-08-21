@@ -40,7 +40,7 @@ grunt.initConfig({
 
 #### options.templateDirs
 Type: `Array`
-Default value: `[path.join(process.cwd(), 'templates']`
+Default value: `[path.join(process.cwd(), 'templates')]`
 
 A an array of paths in which your templates can be found. If not provided, this
 will default to the "templates" directory at the same level as your Gruntfile.
