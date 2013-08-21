@@ -30,7 +30,7 @@ module.exports = (grunt) ->
       templateDirs: [path.join process.cwd(), 'templates']
 
     templateDirs = options.templateDirs or []
-    loaders = (options.loaders or []).concat (new nunjucks.FileSystemLoader(dir) for dir in templateDirs)
+    loaders = (new nunjucks.FileSystemLoader(dir) for dir in templateDirs)
 
     unless loaders.length
       throw new Error 'You must set either the "templateDirs" or "loaders" option (or both).'
@@ -39,7 +39,7 @@ module.exports = (grunt) ->
     # environment.
     envOptions = {}
     for own k, v of options
-      unless k in ['templateDirs', 'loaders']
+      unless k is 'templateDirs'
         envOptions[k] = v
 
     env = new nunjucks.Environment loaders, envOptions
