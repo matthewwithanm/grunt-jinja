@@ -57,6 +57,13 @@ if you use a template "products/phones.html", you can create a
 will be used as context when rendering the template. To add context to all of
 your templates, create an "_all.json" or "_all.js" file in the context root.
 
+#### options.filters
+Type: `Object`
+Default value: `{}`
+
+An object whose keys are filter names and values are functions. Each pair will
+be registered with the template environment using the [addFilter][] method.
+
 ### Other options
 
 Other options are passed directly to the [nunjucks environment object][1].
@@ -140,3 +147,4 @@ grunt.initConfig({
 [1]: http://nunjucks.jlongster.com/api#Environment
 [2]: http://nunjucks.jlongster.com/api#Autoescaping
 [3]: http://nunjucks.jlongster.com/api#Customizing-Variable-and-Block-Tags
+[addFilter]: http://nunjucks.jlongster.com/api#Custom-Filters

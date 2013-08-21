@@ -29,6 +29,7 @@ module.exports = (grunt) ->
     options = @options
       templateDirs: [path.join process.cwd(), 'templates']
       contextRoot: path.join process.cwd(), 'template-context'
+      filters: {}
 
     loadContext = (templateName, removeExtension = true) ->
       ext = path.extname(templateName)
@@ -50,10 +51,14 @@ module.exports = (grunt) ->
     # environment.
     envOptions = {}
     for own k, v of options
-      unless k in ['templateDirs', 'contextRoot']
+      unless k in ['templateDirs', 'contextRoot', 'filters']
         envOptions[k] = v
 
     env = new nunjucks.Environment loaders, envOptions
+
+    # Add custom filters
+    for own k, v of options.filters
+      env.addFilter k, v
 
     # Iterate over all specified file groups.
     @files.forEach (f) ->
