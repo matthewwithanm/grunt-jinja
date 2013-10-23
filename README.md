@@ -55,7 +55,7 @@ correspond to your template names and use them for that template. For example,
 if you use a template "products/phones.html", you can create a
 "products/phones.json" or "products/phones.js" file in the context root and it
 will be used as context when rendering the template. To add context to all of
-your templates, create an "_all.json" or "_all.js" file in the context root.
+your templates, create an "\_all.json" or "\_all.js" file in the context root.
 
 #### options.filters
 Type: `Object`
