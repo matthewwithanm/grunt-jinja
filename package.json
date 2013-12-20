@@ -20,6 +20,9 @@
       "url": "https://github.com/matthewwithanm/grunt-jinja/blob/master/LICENSE"
     }
   ],
+  "keywords": [
+    "gruntplugin"
+  ],
   "main": "Gruntfile.coffee",
   "engines": {
     "node": ">= 0.8.0"
@@ -27,18 +30,16 @@
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "nunjucks": "~1.0.1",
+    "lodash": "~2.4.1"
+  },
   "devDependencies": {
-    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
-  },
-  "keywords": [
-    "gruntplugin"
-  ],
-  "dependencies": {
-    "nunjucks": "~0.1.10"
   }
 }
