@@ -6,23 +6,22 @@
 # Licensed under the MIT license.
 #
 
-nunjucks = require 'nunjucks'
+'use strict'
+
 path = require 'path'
 
-
 module.exports = (grunt) ->
-  _ = grunt.util._
-
+  _ = require 'lodash'
+  nunjucks = require 'nunjucks'
 
   removeInvalidFiles = (files) ->
     files.src.filter (filepath) ->
       # Warn on and remove invalid source files (if nonull was set).
       unless grunt.file.exists filepath
-        grunt.log.warn """Source file "#{ filepath }" not found."""
+        grunt.log.warn "Source file \"#{ filepath }\" not found."
         false
       else
         true
-
 
   grunt.registerMultiTask 'jinja', 'A grunt plugin for compiling Jinja2 templates with nunjucks.', ->
     # Merge task-specific and/or target-specific options with these defaults.
@@ -66,7 +65,7 @@ module.exports = (grunt) ->
       validFiles = removeInvalidFiles f
 
       if validFiles.length > 1
-        grunt.fail.warn """Can't compile multiple sources into a single destination: #{ ', '.join validFiles }"""
+        grunt.fail.warn "Can't compile multiple sources into a single destination: #{ ', '.join validFiles }"
 
       validFiles.forEach (src) ->
         # Get the template name from the filepath
@@ -76,7 +75,7 @@ module.exports = (grunt) ->
             relPath = path.relative dir, fullPath
             unless relPath[0] is '.'
               return relPath
-          throw new Error """Couldn't find "#{ src }" in template dirs: #{ templateDirs.join ', ' }"""
+          throw new Error "Couldn't find \"#{ src }\" in template dirs: #{ templateDirs.join ', ' }"
 
         context = _.extend {}, loadContext('_all', false), loadContext(templateName)
         tmpl = env.getTemplate templateName
@@ -86,4 +85,4 @@ module.exports = (grunt) ->
           grunt.log.error err
           grunt.fail.warn "Couldn't render Jinja template."
         grunt.file.write f.dest, output
-        grunt.log.writeln """File "#{ f.dest }" created."""
+        grunt.log.writeln "File \"#{ f.dest }\" created."
