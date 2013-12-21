@@ -87,8 +87,7 @@ A boolean which, if true, will escape all output by default See
 Type: `Object`
 Default value: {}
 
-An object specifying custom block start and end tags. See [Customizing Variable
-and Block Tags][3].
+An object specifying custom block start and end tags. See [Custom Tags][3].
 
 
 ### Usage Examples
@@ -144,7 +143,7 @@ grunt.initConfig({
 ```
 
 [nunjucks]: https://github.com/jlongster/nunjucks
-[1]: http://nunjucks.jlongster.com/api#Environment
-[2]: http://nunjucks.jlongster.com/api#Autoescaping
-[3]: http://nunjucks.jlongster.com/api#Customizing-Variable-and-Block-Tags
-[addFilter]: http://nunjucks.jlongster.com/api#Custom-Filters
+[1]: http://nunjucks.jlongster.com/api#environment
+[2]: http://nunjucks.jlongster.com/api#autoescaping
+[3]: http://jlongster.github.io/nunjucks/api.html#custom-tags
+[addFilter]: http://nunjucks.jlongster.com/api#custom-filters
