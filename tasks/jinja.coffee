@@ -2,15 +2,15 @@
 # grunt-jinja
 # https://github.com/matthewwithanm/grunt-jinja
 #
-# Copyright (c) 2013 Matthew Tretter
+# Copyright (c) 2013 - 2014 Matthew Tretter
 # Licensed under the MIT license.
 #
 
 'use strict'
 
-path = require 'path'
-
 module.exports = (grunt) ->
+  path = require 'path'
+  
   _ = require 'lodash'
   nunjucks = require 'nunjucks'
 

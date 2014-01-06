@@ -2,7 +2,7 @@
 # grunt-jinja
 # https://github.com/matthewwithanm/grunt-jinja
 #
-# Copyright (c) 2013 Matthew Tretter
+# Copyright (c) 2013 - 2014 Matthew Tretter
 # Licensed under the MIT license.
 #
 
