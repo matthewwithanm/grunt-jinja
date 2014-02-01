@@ -2,14 +2,14 @@
 # grunt-jinja
 # https://github.com/matthewwithanm/grunt-jinja
 #
-# Copyright (c) 2013 Matthew Tretter
+# Copyright (c) 2013 - 2014 Matthew Tretter
 # Licensed under the MIT license.
 #
 
-path = require 'path'
-
-
 module.exports = (grunt) ->
+  'use strict'
+  
+  path = require 'path'
 
   # Project configuration.
   grunt.initConfig
@@ -22,13 +22,13 @@ module.exports = (grunt) ->
     jinja:
       simple:
         options:
-          templateDirs: [path.join __dirname, 'test/fixtures/simple/']
+          templateDirs: ['./test/fixtures/simple/']
         files:
           'tmp/simple/index.html': 'test/fixtures/simple/index.html'
       context:
         options:
-          templateDirs: [path.join __dirname, 'test/fixtures/context/templates/']
-          contextRoot: path.join __dirname, 'test/fixtures/context/template-context/'
+          templateDirs: ['./test/fixtures/context/templates/']
+          contextRoot: './test/fixtures/context/template-context/'
         files:
           'tmp/context/index.html': 'test/fixtures/context/templates/index.html'
 
