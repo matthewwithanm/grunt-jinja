@@ -64,6 +64,13 @@ Default value: `{}`
 An object whose keys are filter names and values are functions. Each pair will
 be registered with the template environment using the [addFilter][] method.
 
+#### options.extensions
+Type: `Object`
+Default value: `{}`
+
+An object whose keys are extension names and values are `Extension`s. Each pair will
+be registered with the template environment using the [addExtension][] method.
+
 ### Other options
 
 Other options are passed directly to the [nunjucks environment object][1].
@@ -148,3 +155,4 @@ grunt.initConfig({
 [2]: http://nunjucks.jlongster.com/api#Autoescaping
 [3]: http://nunjucks.jlongster.com/api#Customizing-Variable-and-Block-Tags
 [addFilter]: http://nunjucks.jlongster.com/api#Custom-Filters
+[addExtension]: http://nunjucks.jlongster.com/api#
